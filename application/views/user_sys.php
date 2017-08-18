@@ -49,7 +49,7 @@
 										<label for="passwordAgain" class="control-label">Profil*</label>
 										<select name="Profil" class="form-control">
 	                                        <option <?php if ($Profil=='Administrateur')echo 'selected="selected"' ;?> value="Administrateur" >Administrateur</option>
-	                                        <option <?php if ($Profil=='Charger de clientele')echo 'selected="selected"' ;?>  value="Charger de clientele"  >Charger de clientele</option>
+	                                        <option <?php if ($Profil=='Charge de clientele')echo 'selected="selected"' ;?>  value="Charge de clientele"  >Charge de clientele</option>
 	                                </select>
 									</div>
                                     <div class="form-group col-sm-6 col-xs-12">
