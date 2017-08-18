@@ -85,19 +85,19 @@
                   <ul class="dropdown-menu dropdown-menu-left">
                     <li><a href="listings.html">Voyages</a></li>
                     <li><a href="add-listings.html">Resevation</a></li>
-                    <li><a href="add-listings.html">Utilisateur</a></li>
+                   <li><a href="<?php echo site_url('admin/utilisateur');?>"><i class="md md-album"></i>Utilisateurs</a></li>
                   </ul>
                 </li>
                 
                 <li class="dropdown singleDrop">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i> Systeme <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                   <ul class="dropdown-menu dropdown-menu-left">
-                    <li><a href="<?php echo site_url('welcome/user_sys');?>">Utilisateur</a></li>
+                    <li><a href="<?php echo site_url('admin/utilisateur');?>">Utilisateur</a></li>
                     <li><a href="add-listings.html">Changer mot de passe</a></li>
                     
                   </ul>
                 </li>
-                <li><a href="<?php echo site_url('welcome/deconnexion');?>"><i class="fa fa-user-times" aria-hidden="true"></i> Déconnexion</a></li>
+                <li><a href="<?php echo site_url('admin/logout'); ?>"><i class="fa fa-user-times" aria-hidden="true"></i> Déconnexion</a></li>
               </ul>
             </div>
           </div>
@@ -107,5 +107,7 @@
 
 
 <!-- DASHBOARD SECTION -->
-
+<section class="clearfix bg-dark equalHeight dashboardSection">
+  
+</section>
 

@@ -70,13 +70,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav navbar-right">
-              <li class=""><a href="<?php echo site_url('welcome/proposer_voyage');?>">Proposer un voyage </a></li>
-                 <li class=""><a href="<?php echo site_url('welcome/chercher_voyage');?>">Chercher un voyage</a></li>
+              <li class=""><a href="proposevyg.html">Proposer un voyage </a></li>
+                 <li class=""><a href="cherchervyg.html">Chercher un voyage</a></li>
                 
                   
-                <li class=""><a href="<?php echo site_url('welcome/inscription');?>">Inscription </a></li>
-                   <li class=""><a href="<?php echo site_url('welcome/connexion');?>">Connection </a></li>
-                   <li class=""><a href="<?php echo site_url('welcome/demo');?>">Demo </a></li>
+                 <li class=""><a href="inscription.html">Inscription </a></li>
+                  <li class=""><a href="connexion.html">Connection </a></li>
+                   <li class=""><a href="demo.html">Demo </a></li>
                   <!--<li class="active dropdown singleDrop">
                       <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">home <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                   <ul class="dropdown-menu dropdown-menu-right">

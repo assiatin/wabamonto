@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Connexion wabamoto</title>
+  <title>Wabamonto</title>
 
   <!-- PLUGINS CSS STYLE -->
   <link href="<?php echo base_url();?>assets/wabamonto/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
@@ -43,8 +43,8 @@
 </head>
 
 <body class="body-wrapper">
-  <div class="page-loader" style="background: url(img/preloader.gif) center no-repeat #fff;"></div>
-<div class="main-wrapper">
+  <div class="page-loader" style="background: url(<?php echo base_url();?>assets/wabamonto/img/preloader.gif) center no-repeat #fff;"></div>
+  <div class="main-wrapper">
     <!-- HEADER -->
     <header id="pageTop" class="header">
 
@@ -54,9 +54,42 @@
 
         <!-- NAVBAR -->
         <nav id="menuBar"   style="background: rgba(0, 0, 0, 0.7) !important;" class="navbar navbar-default lightHeader" role="navigation">
-          
+          <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html"><img src="<?php echo base_url();?>assets/wabamonto/img/logo.png" alt="logo"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul class="nav navbar-nav navbar-right">
+              <li class=""><a href="<?php echo site_url('welcome/proposer_voyage');?>">Proposer un voyage </a></li>
+                 <li class=""><a href="<?php echo site_url('welcome/chercher_voyage');?>">Chercher un voyage</a></li>
+                 
+                  <?php if(!$this->session->userdata('user'))
+		                 {?>
+		
+	
+                 <li class=""><a href="<?php echo site_url('welcome/inscription');?>">Inscription </a></li>
+                 
+                  <li class=""><a href="<?php echo site_url('welcome/connexion');?>">Connection </a></li>
+                   <?php }?>
+                   <li class=""><a href="<?php echo site_url('welcome/demo');?>">Demo </a></li>
+                  
+              </ul>
+            </div>
+            <!--<button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#loginModal"> + <span>Add Listing</span> </button>-->
+          </div>
         </nav>
       </div>
+    
     </header>
 
 
@@ -67,11 +100,11 @@
 			<div class="center-block col-md-5 col-sm-6 col-xs-12">
 				<div class="panel panel-default loginPanel">
 					<div class="panel-heading text-center">Connexion</div>
-				  <div class="panel-body">
-						<form class="loginForm" action="<?php echo site_url('welcome/admin');?>" method="post">
-                        <div class="form-group">
-								<label for="userName">E-mail *</label>
-								<input type="text" name="txtlogin" class="form-control" placeholder="Email" id="userName">
+					<div class="panel-body">
+						<form class="loginForm" action="<?php echo site_url('welcome/connexion');?>" method="post">
+							<div class="form-group">
+								<label for="userName">E-mail ou Télephone *</label>
+								<input type="text" name="txtlogin" class="form-control" placeholder="Email ou  télephone (Ex Tél: 97000000)." id="userName">
 								 
 							</div>
 							<div class="form-group">
@@ -79,21 +112,29 @@
 								<input type="password" name="txtpwd" class="form-control" placeholder="Entrer votre mot de passe." id="userPassword">
 								 
 							</div>
-                            
-							
-							
 							<div class="form-group">
-								 
-                                <input type="submit" class="btn btn-primary pull-left" name="btnSave" value="&nbsp;&nbsp;Connexion&nbsp;&nbsp;"/>
-
+                             <input type="submit" class="btn btn-primary pull-left" name="btnSave" value="&nbsp;&nbsp;Connexion&nbsp;&nbsp;"/>
 								
+								<a href="#" class="pull-right link">Mot de passe oublié?</a>
 							</div>
                             
                             
                     
 						</form>
-                    
-                      <!--<div class="row">
+                        <div style="text-align:center">
+            <span >OU</span>
+            <hr>
+          </div>
+                        <div class="row">
+            <div class="col-xs-12" style="padding-bottom:10px;">
+              <button class="btn btn-facebook btn-block" style="background:#3b5998"><i class="fa fa-facebook" aria-hidden="true"></i> Se connecter avec Facebook</button>
+            </div>
+            <div class="col-xs-12">
+              <button class="btn btn-google btn-block" style="background:#dd4b39"><i class="fa fa-google" aria-hidden="true"></i> Se connecter avec Google</button>
+            </div>
+						
+          </div>
+                        <!--<div class="row">
                    
                             <div class="col-md-6">
                             <button type="submit" class="btn btn-primary" style="background-color:#000059">Rechercher <i class="fa fa-search" aria-hidden="true"></i></button>
@@ -103,38 +144,12 @@
                             </div>
                             </div>-->
 					</div>
-					
+					<div class="panel-footer text-center">
+						<p>Vous n'avez pas un compte? <a href="sign-up.html" class="link">S'inscrire</a></p>
+					</div>
                     
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-
-    <!-- FOOTER -->
-    
-  </div>
-
-  <!-- LOGIN  MODAL --><!-- JAVASCRIPTS -->
-  <script src="<?php echo base_url();?>assets/wabamonto/plugins/jquery/jquery.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/smoothscroll/SmoothScroll.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/waypoints/waypoints.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/counter-up/jquery.counterup.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/datepicker/bootstrap-datepicker.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/owl-carousel/owl.carousel.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/isotope/isotope.min.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/fancybox/jquery.fancybox.pack.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/isotope/isotope-triger.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEDfNcQRmKQEyulDN8nGWjLYPm8s4YB58"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/map/js/rich-marker.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/plugins/map/js/infobox_packed.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/js/single-map.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/js/map.js"></script>
-<script src="<?php echo base_url();?>assets/wabamonto/js/custom.js"></script>
-
-</body>
-
-</html>

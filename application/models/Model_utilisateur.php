@@ -12,95 +12,116 @@ class Model_utilisateur extends CI_Model {
         parent::__construct();
     }
 
-	
-	public function get_all()
-    {
-		$this->db->select("users.*");
-		$this->db->from('users');
-        $this->db->order_by('users.nomUsers', 'asc'); 
-       
-      //  $this->db->order_by('sys_droit.Nom', 'asc');
-		$query = $this->db->get();
-		
-        return $query->result();
-    }
-	
-	
-	public function get_droit_for_select()
-    {
-    	 
-        $query = $this->db->get('sys_droit');
-		
-		$list=array();
-		// $list['-1']='Sélectionner...'.$query->num_rows();;
-		 foreach($query->result_array() as $row)
-		 { 
-		   $list[$row['Id']]=$row['Nom'];
-		 }
-		 return $list;
-		  
-    }
-	
-	public function insert()
+	public function inscription()
     {
      
 	 	$this->db->select();
-		$this->db->where('emailUsers', $this->emailUsers);
-		//$this->db->where('droit_id',$this->droit_id);
-		$this->db->from('users');
+		$this->db->where('emailUtilisateurs', $this->emailUtilisateurs);	
+		$this->db->from('utilisateurs');
 		$res=$this->db->get();
 		 
 		if (count($res->result())==0)
 		{
-			$this->db->insert('users', $this);
-			return $this->db->insert_id();
+			$this->db->trans_begin();
+			$this->db->insert('utilisateurs', $this);
+			$id = $this->db->insert_id();
+			if ($this->db->trans_status() === FALSE)
+			{
+					$this->db->trans_rollback();
+					return 2;
+			}
+			else
+			{
+					$this->db->trans_commit();
+					
+					$this->load->library('email');
+
+					$this->email->set_mailtype("html");
+					$this->email->from('clangnito@gmail.com', 'Wabamonto: Inscription');
+					$this->email->to($this->emailUtilisateurs);
+					$this->email->cc('another@another-example.com');
+					$this->email->bcc('them@their-example.com');
+					
+					$this->email->subject('Confirmation de votre inscription sur Wabamonto');
+					$this->email->message('<html>
+
+    <body>
+        <p style="">Bonjour '.$this->nomUtilisateurs.' '.$this->prenomUtilisateurs.',
+        </p>
+
+        <p>Veuillez cliquer sur le lien suivant pour valider votre inscription 
+        </p>
+
+         Lien <a href="'.base_url().'index.php/welcome/register_validation/'.$this->emailUtilisateurs.'/'.$id.'">'.base_url().'index.php/welcome/register_validation/'.$this->emailUtilisateurs.'/'.$id.'</a>
+		
+		<br>
+
+        <p>Merci ,<br><br>
+            Wabamonto : Voyager en toute securité. 
+        </p>
+    </body>
+</html>');
+					$this->email->send();
+					/*var_dump($this->email->send());
+					
+					exit();*/
+					return 1;
+			}
+			
 		}
 		else
 		{
-			return -1;
+			return 2;
 		}
 		
-       
-		/*if (!$insert ) 
-		{
-		   //some logics here, you may create some string here to alert user
-		} else {
-		   //other logics here
-		}*/
+      
     }
 	
-	
-	public function update_utilisateur_agence($data)
-    {
-	 	if($this->db->insert('agence_utilisateur', $data))
-		{
-			return true;
-		}
-		else
-		{
-			echo $this->db->_error_number()."_".$this->db->_error_message();
-		}
-		
-    }
-	
-	/*function update($id)
-    {
-		$this->db->where('id',$id);
-		$this->db->update('sys_profil_droit', array('intitule'=>$lib));
- 	
-    }*/
-	
-	
-	public function LoadId($id)
+	public function connexion($login,$hash)
 	{
-		$this->db->select();
-		$this->db->where('idUsers',$id);
-		$this->db->from('users');
+		$this->db->select("utilisateurs.*");
+		$this->db->where('emailUtilisateurs',$login);
+		$this->db->where('passwordUtilisateurs',MD5($hash));
+		$this->db->where('statut',"2");
 		
-		$q=$this->db->get();
-		return $q;
+		$this->db->from('utilisateurs');
+		//$this->db->join('bureau','bureau.code=sys_utilisateurs.Bureau_ID');
+		$query=$this->db->get();
+		/*var_dump(count($query->result()));
+		exit();*/
+		return $query->result();
 	}
 	
+	
+	
+	public function register_validation()
+    {
+     
+		$this->db->select();
+		$this->db->where('emailUtilisateurs', $this->emailUtilisateurs);	
+		$this->db->where('idUtilisateurs', $this->idUtilisateurs);	
+		//$this->db->where('etatCandidat', "1");	pas necessaire pour la validation cause une erreur lorsqu on clique 2 fois sur le lien de validation
+		$this->db->from('utilisateurs');
+		$res = $this->db->get();
+		if (count($res->result())!=0 )
+		{
+			
+			$this->db->where('idUtilisateurs',$this->idUtilisateurs);
+			$this->db->update('utilisateurs', array('statut'=>"2"));
+			
+			
+			return 1;
+			
+			
+		}
+		else
+		{
+			
+			return 0;
+		}
+		
+      
+    }
 	
 	public function Search($Email,$hash)
 	{
@@ -124,47 +145,6 @@ class Model_utilisateur extends CI_Model {
 	}
 	
 	
-	function update($id)
-    {
-		$this->db->where('idUsers',$id);
-		$this->db->update('users',  $this);
-    
-    
-		
-    }
-		
- 
-	public function user_activer($id,$activer)
-    { 
-		 
-			$this->db->where('idUsers',$id);
-			$this->db->update('users', array('actif'=>$activer));
-	
-    }
-	
-	public function changer_password($login,$Hash,$passeword_old)
-    { 
-		 
-		 $this->db->select();
-		$this->db->where('login', $login);
-		$this->db->where('Hash',MD5($passeword_old));
-		$this->db->from('users');
-		$res=$this->db->get();
-		 
-		if (count($res->result())==0)
-		{
-			//$this->db->insert('sys_utilisateurs', $this);
-			return 0;
-		}
-		else
-		{
-			$this->db->where('Login',$login);
-			$this->db->update('users', array('Hash'=>MD5($Hash)));
-			return 1;
-		}
-			
-	
-    }
 	
 	
 }

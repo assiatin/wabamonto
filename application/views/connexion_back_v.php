@@ -68,24 +68,35 @@
 				<div class="panel panel-default loginPanel">
 					<div class="panel-heading text-center">Connexion</div>
 				  <div class="panel-body">
-						<form class="loginForm" action="<?php echo site_url('welcome/admin');?>" method="post">
-                        <div class="form-group">
-								<label for="userName">E-mail *</label>
-								<input type="text" name="txtlogin" class="form-control" placeholder="Email" id="userName">
+						<!--form class="loginForm" -->
+						<form class="form-horizontal m-t-20" action="<?php echo site_url('admin/doConnect'); ?>" method="post">
+						
+						
+						 <?php 
+			
+						if ($notification=="0")
+						{
+							echo  '<div class="alert alert-danger alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								Connexion echouée!.
+							</div>';
+						}
+						
+						?>
+						
+						
+							<div class="form-group">
+								<label for="userName">E-mail </label>
+								<input type="text" required class="form-control" placeholder="Votre Email" id="userName" name="Email">
 								 
 							</div>
 							<div class="form-group">
 								<label for="userPassword">Mot de passe *</label>
-								<input type="password" name="txtpwd" class="form-control" placeholder="Entrer votre mot de passe." id="userPassword">
+								<input type="password" required class="form-control" placeholder="Entrer votre mot de passe." id="userPassword" name="pwd">
 								 
 							</div>
-                            
-							
-							
 							<div class="form-group">
-								 
-                                <input type="submit" class="btn btn-primary pull-left" name="btnSave" value="&nbsp;&nbsp;Connexion&nbsp;&nbsp;"/>
-
+								<button type="submit" class="btn btn-primary pull-left">Connexionn</button>
 								
 							</div>
                             

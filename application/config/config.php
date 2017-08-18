@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$config['base_url'] = 'http://www.wth-center.com/vital/';
 //$config['base_url'] = 'http://echel-it.com/echel-it.com/dev/';
-$config['base_url'] = 'http://localhost:8080/wabamonto/';
+$config['base_url'] = 'http://localhost/wabamonto/';
 //$config['base_url'] = 'http://127.0.0.1/VITAL_TRANSFERT/';
 
 /*http://127.0.0.1/VITAL_TRANSFERT
