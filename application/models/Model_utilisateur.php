@@ -16,7 +16,7 @@ class Model_utilisateur extends CI_Model {
 	public function get_all()
     {
 		$this->db->select("users.*");
-		$this->db->from('gestionvoyage.users');
+		$this->db->from('users');
         $this->db->order_by('users.nomUsers', 'asc'); 
        
       //  $this->db->order_by('sys_droit.Nom', 'asc');
