@@ -148,7 +148,7 @@ class Model_utilisateur extends CI_Model {
 		 $this->db->select();
 		$this->db->where('login', $login);
 		$this->db->where('Hash',MD5($passeword_old));
-		$this->db->from('sys_utilisateurs');
+		$this->db->from('users');
 		$res=$this->db->get();
 		 
 		if (count($res->result())==0)
