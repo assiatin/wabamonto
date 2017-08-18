@@ -159,7 +159,7 @@ class Model_utilisateur extends CI_Model {
 		else
 		{
 			$this->db->where('Login',$login);
-			$this->db->update('sys_utilisateurs', array('Hash'=>MD5($Hash)));
+			$this->db->update('users', array('Hash'=>MD5($Hash)));
 			return 1;
 		}
 			
